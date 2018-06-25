@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title><?= $broker->broker ?> | Login (Single Sign-On demo)</title>
+        <link href="/static/bootstrap.css" rel="stylesheet">
+        <script src="/static/js/jquery-1.6.4.js" type="text/javascript"></script>
+
+        <style>
+            h1 {
+                margin-bottom: 30px;
+            }
+        </style>
+
+        <script language="javascript">
+            var url = window.location.href;
+            //获取url中的参数
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+                var context = "";
+                if (r != null)
+                    context = r[2];
+
+
+                reg = null;
+                r = null;
+                return context == null || context == "" || context == "undefined" ? "" : context;
+            }
+
+
+            function login() {
+                // console.info("点击了登录");
+                 var userName = $("#inputUsername").val();
+                // console.info(userName)
+                var userPass = $("#inputPassword").val();
+                // console.info(userPass);
+                if (userName == "" || userName == null) {
+                    alert("用户名不能为空");
+                    return false;
+                    } else if (userPass == "" || userPass == null) {
+                    alert("密码不能为空");
+                    return false;
+                    } else {
+                    var next_url = GetQueryString( "next_url");
+                    $.post("/do_login", {
+                        username: userName,
+                        password: userPass,
+                        next_url: next_url
+                    },function (data, status) {
+                        if (data == "no user"){
+                            alert("aaaa");
+                            window.location.href = "http://127.0.0.1:8080"
+                            return
+                        }
+                        window.location.href = data;
+                    })
+                }
+}
+
+
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h1> {{ app_name }}<small>(Single Sign-On demo)</small></h1>
+
+
+
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="username" class="form-control" id="inputUsername">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control" id="inputPassword">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button id="login"  onclick="login()"  class="btbtn-default">登录</button>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>
+
