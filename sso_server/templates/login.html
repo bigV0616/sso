@@ -9,7 +9,6 @@
                 margin-bottom: 30px;
             }
         </style>
-
         <script language="javascript">
             var url = window.location.href;
             //获取url中的参数
@@ -47,7 +46,7 @@
                         next_url: next_url
                     },function (data, status) {
                         if (data == "no user"){
-                            alert("aaaa");
+                            alert("登录验证失败!");
                             window.location.href = "http://127.0.0.1:8080"
                             return
                         }

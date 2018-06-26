@@ -6,6 +6,9 @@ class Config(object):
     ADMIN = "yangdawei"
     APP_DEV_PORT = 8888
     SECRET_KEY = os.urandom(12)
+    LDAP_SERVER = "ldap://10.9.2.222:389"
+    BASE_DN = "dc=7lk, dc=com"
+    DN = "cn=Manager,dc=7lk,dc=com"
     config_log = {
         'version': 1,
         'formatters':{
@@ -42,6 +45,7 @@ class Config(object):
             }
         }
     }
+
 
 class ProdConfig(Config):
     DEBUG = False

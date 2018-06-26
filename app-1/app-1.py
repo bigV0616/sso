@@ -19,6 +19,7 @@ def hello_world():
     1. 查看请求cookie中是否存在用户cookie
     2. 校验是否存在真实用户
     3. 不存在用户cookie， 则去sso登录
+    注： cookie sid存储在mem中，重启丢失，如果有需求可以吧cookie 存储到db
     :return:
     '''
     cookie_token = request.cookies.get("cookie_token", None)
@@ -30,7 +31,7 @@ def hello_world():
                 if r.text != 'no user':
                     return
         except Exception as e:
-            print "eeee>>>>:", e
+            print e
     return redirect(sso_server + '/login?next_url=' + request.url)
 
 @app.route("/test/sso")
@@ -61,4 +62,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug = True, host='0.0.0.0',port=8080)
+    app.run(debug = True, host='0.0.0.0',port=8082)

@@ -6,9 +6,9 @@ import python_jwt
 import random
 from flask import Flask, request, redirect, session, render_template, make_response
 from libs.token import checkCookieToken, getCookieInfo
+from libs.oldap import checkUserPwd
 import conf
 from libs.oldap import checkUserPwd
-
 token_list = {}
 login_user = {}
 def create_app(object_name):
@@ -41,7 +41,8 @@ def create_app(object_name):
         next_url = request.form.get("next_url")
         if username and password:
             # 去OpenLdap中校验用户名密码
-            if username == "test" and password == "test":
+            # if username == "test" and password == "test":
+            if checkUserPwd(username, password):
                 # 生成token
                 seeds = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
                 token = ''
