@@ -11,6 +11,7 @@ import conf
 from libs.oldap import checkUserPwd
 token_list = {}
 login_user = {}
+
 def create_app(object_name):
     '''
     sso逻辑不多，就在搞一层了
@@ -76,11 +77,10 @@ def create_app(object_name):
 
     return app
 
-
+app = create_app("conf.app.DevConfig")
 
 if __name__ == "__main__":
     # APP_DEV_PORT = 8902
-    app = create_app("conf.app.DevConfig")
     APP_DEV_PORT = app.config.get("APP_DEV_PORT")
     app.run(host='0.0.0.0', port=APP_DEV_PORT, debug=app.config["DEBUG"])
 

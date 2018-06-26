@@ -4,7 +4,7 @@ import os
 
 class Config(object):
     ADMIN = "yangdawei"
-    APP_DEV_PORT = 8888
+    APP_DEV_PORT = 8080
     SECRET_KEY = os.urandom(12)
     LDAP_SERVER = "ldap://10.9.2.222:389"
     BASE_DN = "dc=7lk, dc=com"
@@ -61,7 +61,7 @@ class ProdConfig(Config):
 
 class DevConfig(Config):
     DEBUG = True
-    APP_DEV_PORT = 8888
+    APP_DEV_PORT = 8080
     DB_HOST = "127.0.0.1"
     DB_PORT = 3306
     DB_NAME = "ops"
