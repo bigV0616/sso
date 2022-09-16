@@ -26,7 +26,7 @@ ipython-genutils==0.2.0
 itsdangerous==0.24
 Jinja2==2.10
 jwcrypto==0.4.2
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 MySQL-python==1.2.5
 paramiko==2.4.1
